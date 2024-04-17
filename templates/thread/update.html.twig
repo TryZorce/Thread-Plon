@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Modification Thread
+{% endblock %}
+
+{% block body %}
+	<div class="thread-create">
+		<h1>Modification de Thread</h1>
+
+		{{ form_start(updateform) }}
+
+		<div class="form-group">
+			{{ form_label(updateform.title, 'Titre') }}
+			{{ form_widget(updateform.title, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(updateform.title) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_label(updateform.description, 'Description') }}
+			{{ form_widget(updateform.description, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(updateform.description) }}
+		</div>
+
+	
+
+		<div class="form-group">
+			{{ form_label(updateform.body, 'Corps du Thread') }}
+			{{ form_widget(updateform.body, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(updateform.body) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_label(updateform.category, 'Catégorie') }}
+			{{ form_widget(updateform.category, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(updateform.category) }}
+		</div>
+
+		<button type="submit" class="btn btn-primary">Créer le Thread</button>
+
+		{{ form_end(updateform) }}
+	</div>
+{% endblock %}

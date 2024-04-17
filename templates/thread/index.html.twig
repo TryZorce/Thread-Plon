@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Threads
+{% endblock %}
+
+{% block body %}
+	<div class="thread">
+		<h1>Liste des Threads</h1>
+		<a href="thread/create">Crée un thread</a>
+		{% for thread in threads %}
+		<div class="wrapper_list_thread">
+			<a href="{{ path('app_thread_id', {'id': thread.id}) }}">
+					<h3>{{ thread.title }}</h3>
+					<h4>
+						{% for category in thread.category %}
+							<span>
+								{{category.title}}
+							</span>
+						{% endfor %}
+					</h4>
+				<p class="text-white">{{ thread.description }}</p>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+
+	{# Section de débogage #}
+	<div class="debugBox">
+		<h2>Debug</h2>
+		<pre>{{ dump(threads) }}</pre>
+	</div>
+{% endblock %}

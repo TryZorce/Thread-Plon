@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer le thread
+{% endblock %}
+
+{% block body %}
+	<h1>Supprimer le thread "{{ thread.title }}"</h1>
+	<p>Voulez-vous vraiment supprimer ce thread ?</p>
+	<form method="post" action="{{ path('app_thread_delete', {'id': thread.id}) }}" onsubmit="return confirm('Are you sure you want to delete this thread?')">
+		<input type="hidden" name="_method" value="DELETE">
+		<button type="submit">Delete Thread</button>
+	</form>
+
+{% endblock %}

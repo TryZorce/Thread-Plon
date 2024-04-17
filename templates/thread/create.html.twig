@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Création Thread
+{% endblock %}
+
+{% block body %}
+	{% if app.user %}
+		<div class="thread-create">
+			<h1>Création de Thread</h1>
+
+			{{ form_start(createform) }}
+
+			<div class="form-group">
+				{{ form_label(createform.title, 'Titre') }}
+				{{ form_widget(createform.title, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(createform.title) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(createform.description, 'Description') }}
+				{{ form_widget(createform.description, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(createform.description) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(createform.body, 'Corps du Thread') }}
+				{{ form_widget(createform.body, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(createform.body) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(createform.category, 'Catégorie') }}
+				{{ form_widget(createform.category, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(createform.category) }}
+			</div>
+
+			<button type="submit" class="btn btn-primary">Créer le Thread</button>
+
+			{{ form_end(createform) }}
+		</div>
+	{% endif %}
+	{% if not app.user %}
+		<h1>Vous n'êtes pas connecté</h1>
+		<a href="/login">Connecter vous</a>
+	{% endif %}
+
+{% endblock %}

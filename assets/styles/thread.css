@@ -1,0 +1,86 @@
+.thread {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    a {
+        margin-left: 20px;
+        color: black;
+    }
+}
+
+.thread_title {
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 25px;
+}
+
+.thread_user {}
+
+.wrapper_list_thread {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 20px;
+    width: 80%;
+    a {
+        width: 100%;
+        margin-left: 20px;
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.thread_response{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 20px;
+    width: 80%;
+}
+
+/* Style général du formulaire */
+.thread-create {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Style des étiquettes de champ */
+.thread-create label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+/* Style des champs de formulaire */
+.thread-create input[type="text"],
+.thread-create textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Style du bouton de soumission */
+.thread-create button[type="submit"] {
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+

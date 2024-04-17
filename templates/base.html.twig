@@ -1,17 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{% block stylesheets %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+			<link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+		{% endblock %}
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		{% block header %}
+			<header class="site-header">
+				<div class="container">
+					<h1 class="site-title">Thread-Plon</h1>
+					<nav class="site-nav">
+						<div class="burger-menu">
+							<div class="burger-line"></div>
+							<div class="burger-line"></div>
+							<div class="burger-line"></div>
+						</div>
+						<ul class="nav-links">
+							<li>
+								<a href="/">Thread</a>
+							</li>
+
+
+
+							{% if app.user %}
+								<li>
+									<a href="/logout">Déconnexion</a>
+								</li>
+
+								<li>
+									<a href="/profil">Profil</a>
+								</li>
+							{% endif %}
+							
+							{% if not app.user %}
+								<li>
+									<a href="/login">Connexion</a>
+								</li>
+								<li>
+									<a href="/register">S'inscrire</a>
+								</li>
+							{% endif %}
+
+
+
+						</ul>
+					</nav>
+				</div>
+			</header>
+		{% endblock %}
+
+		{% block body %}{% endblock %}
+
+		{% block footer %}
+			<footer class="site-footer">
+				<div class="container">
+					<p>&copy; 2024 My Site. All rights reserved.</p>
+				</div>
+			</footer>
+
+			<script>
+				const burgerMenu = document.querySelector('.burger-menu');
+const navLinks = document.querySelector('.nav-links');
+
+burgerMenu.addEventListener('click', () => {
+navLinks.classList.toggle('active');
+});
+			</script>
+		{% endblock %}
+
+
+	</body>
 </html>
