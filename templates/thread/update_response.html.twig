@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Update Response
+{% endblock %}
+
+{% block body %}
+    <h1>Update Response</h1>
+
+    {% if app.user and userIsResponseCreator %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Update Response</button>
+        {{ form_end(form) }}
+    {% else %}
+       <a href="/">ARRETE DE MODIFIER L'URL</a>
+    {% endif %}
+
+{% endblock %}

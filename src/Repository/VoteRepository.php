@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Vote;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Response;
 
 /**
  * @extends ServiceEntityRepository<Vote>
@@ -21,28 +22,13 @@ class VoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Vote::class);
     }
 
-    //    /**
-    //     * @return Vote[] Returns an array of Vote objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('v.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Vote
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function countVotesForResponse(Response $response): int
+    {
+        return $this->createQueryBuilder('v')
+        ->select('COALESCE(SUM(v.vote), 0)')
+            ->andWhere('v.response_id = :response')
+            ->setParameter('response', $response)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

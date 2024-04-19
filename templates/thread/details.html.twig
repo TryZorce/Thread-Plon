@@ -7,27 +7,54 @@
 {% block body %}
 	<div class="thread">
 		<h1>{{ thread.title }}</h1>
-		{% if app.user and (thread.getUserId() == app.user or is_granted('ROLE_ADMIN')) %}
-			<a href="{{ path('app_thread_update', {'id': thread.id}) }}">Modifier le thread</a>
-		{% endif %}
-		{% if app.user and (thread.getUserId() == app.user or is_granted('ROLE_ADMIN')) %}
-			<a href="{{ path('app_thread_delete', {'id': thread.id}) }}">Supprimer le thread</a>
-		{% endif %}
-
 		<p class="thread_status">{{ thread.status }}</p>
 		<h2>
 			{% for category in thread.category %}
 				<span class="thread_title">{{ category.title }}</span>
 			{% endfor %}
 		</h2>
-		<p class="thread_user">{{ thread.getUserId().username }}</p>
+
+		<div class="thread_response">
+			<p class="thread_user">{{ thread.getUserId().username }}</p>
+			<p>{{ thread.description }}</p>
+			<p>{{ thread.body }}</p>
+		</div>
+
+		{% if app.user and (thread.getUserId() == app.user or is_granted('ROLE_ADMIN')) %}
+			<a href="{{ path('app_thread_update', {'id': thread.id}) }}">Modifier le thread</a>
+			<a href="{{ path('app_thread_delete', {'id': thread.id}) }}">Supprimer le thread</a>
+		{% endif %}
+
 		<h3>Réponses :</h3>
 
 		{% for response in thread.responses %}
 			<div class="thread_response">
-				<p>Par :
-					{{ response.getUserId().username }}</p>
+				<a href="{{ path('app_user_detail', {'id': response.getUserId().id}) }}">
+					<p>Par :
+						{{ response.getUserId().username }}</p>
+				</a>
+
+				<p>Votes :
+					{{ votes[response.id] }}</p>
+				{% set userVoted = false %}
+				{% if app.user %}
+					{% for vote in response.votes %}
+						{% if vote.userId.id == app.user.id %}
+							{% set userVoted = true %}
+						{% endif %}
+					{% endfor %}
+					{% if not userVoted %}
+						<a href="{{ path('vote_down', {'threadId': thread.id, 'responseId': response.id}) }}">Vote -</a>
+						<a href="{{ path('vote_up', {'threadId': thread.id, 'responseId': response.id}) }}">Vote +</a>
+					{% endif %}
+				{% endif %}
+
 				<p>{{ response.body }}</p>
+
+				{% if app.user and userIsResponseCreator[response.id] %}
+					<a href="{{ path('app_response_update', {'threadId': thread.id, 'responseId': response.id}) }}">Modifier la réponse</a>
+				{% endif %}
+
 			</div>
 		{% endfor %}
 
@@ -45,12 +72,12 @@
 			</div>
 		{% endif %}
 
-		<a href="{{ path('app_thread') }}">Retour sur la liste des threads</a>
+		<a href="/">Retour sur la liste des threads</a>
 	</div>
 
 	{# Section de débogage #}
-	<div class="debugBox">
+	{# <div class="debugBox">
 		<h2>Debug</h2>
 		<pre>{{ dump(thread) }}</pre>
-	</div>
+	</div> #}
 {% endblock %}

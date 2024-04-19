@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Profile
+{% endblock %}
+
+{% block body %}
+	<h1>Update Profile</h1>
+	{{ form_start(form) }}
+	{{ form_label(form.username, 'Username') }}
+	{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+	{{ form_errors(form.username) }}
+
+	{{ form_label(form.email, 'Email') }}
+	{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+	{{ form_errors(form.email) }}
+	<button type="submit">Update</button>
+	{{ form_end(form) }}
+{% endblock %}

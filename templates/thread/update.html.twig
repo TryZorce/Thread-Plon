@@ -16,13 +16,19 @@
 			{{ form_errors(updateform.title) }}
 		</div>
 
+		{% if isAdmin %}
+			<div class="form-group">
+				{{ form_label(updateform.status, 'Statut') }}
+				{{ form_widget(updateform.status, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(updateform.status) }}
+			</div>
+		{% endif %}
+
 		<div class="form-group">
 			{{ form_label(updateform.description, 'Description') }}
 			{{ form_widget(updateform.description, {'attr': {'class': 'form-control'}}) }}
 			{{ form_errors(updateform.description) }}
 		</div>
-
-	
 
 		<div class="form-group">
 			{{ form_label(updateform.body, 'Corps du Thread') }}

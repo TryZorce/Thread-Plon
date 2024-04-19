@@ -35,17 +35,16 @@
 							</li>
 
 
-
 							{% if app.user %}
 								<li>
 									<a href="/logout">Déconnexion</a>
 								</li>
 
 								<li>
-									<a href="/profil">Profil</a>
+									<a href="{{ path('app_user') }}">Profil</a>
 								</li>
 							{% endif %}
-							
+
 							{% if not app.user %}
 								<li>
 									<a href="/login">Connexion</a>
@@ -54,7 +53,6 @@
 									<a href="/register">S'inscrire</a>
 								</li>
 							{% endif %}
-
 
 
 						</ul>
